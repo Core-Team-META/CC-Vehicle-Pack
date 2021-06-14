@@ -104,16 +104,7 @@ The VehiclePack_AVLB_BridgeArmServer is the key component for the bridge launchi
 for the animation of the arm, spawning or despawning the physical bridges, and keeping track of the bridges placed.
 The script should be networked and the hierarchy should be arranged accordingly:
 
-- VehicleObject (networked)
-- VehiclePack_AVLB_BridgeArmServer(networked)
-- MainArm (networked)
-- SubArm (networked)
-- Bridge (networked)
-- BridgeHalf1 (networked client-context folder)
-- ...
-- BridgeHalf2 (networked client-context folder)
-- ...
-- ...
+![Screenshot (981)](https://user-images.githubusercontent.com/55603848/121970681-e8ebfe00-cd2b-11eb-990b-5e8fa978a068.png)
 
 The pivot point for the main arm group should be placed where the base hinge joint of the main arm would be on the
 vehicle. The pivot point for the sub arm group should be placed where the secondary hinge joint of the main arm would
@@ -149,49 +140,8 @@ is responsible for syncing the client-side geo of the arm with the networked gro
 the same arm components as the ones used by the VehiclePack_AVLB_BridgeArmServer as well as their client-side counterparts.
 The module should be in client-context and the hierarchy should be arranged accordingly:
 
-- VehicleObject (networked)
-- VehiclePack_AVLB_BridgeArmServer(networked)
-- MainArm (networked)
-- ...
-- ClientContext
-- VehiclePack_AVLB_BridgeArmClient
-- VehiclePack_AVLB_ClientComponents
-- MainArm
-- PistonTop1
-- ...
-- PistonTop2
-- ...
-- PistonTop3
-- ...
-- SubArm
-- PistonBottom3
-- ...
-- ...
-
-  - PistonBottom1
-  - ...
-  - PistonBottom2
-  - ...
-  - ExtraFX
-  - ...
-
-- TankBody
-- Hull
-  -Treads
-- TreadsLeft
-- Tread
-- Wheels
-- Wheel
-- Wheel
-- ...
-- TreadsRight
-- Tread
-- Wheels
-- Wheel
-- Wheel
-- ...
-
-  - ...
+![Screenshot (982)](https://user-images.githubusercontent.com/55603848/121970717-fef9be80-cd2b-11eb-8e9d-6eb3297b2e54.png)
+![Screenshot (983)](https://user-images.githubusercontent.com/55603848/121970720-00c38200-cd2c-11eb-8764-867aab2d5a86.png)
 
 The client-side counterparts of the networked arm components should have the exact same pivot point position and rotation.
 The VehiclePack_AVLB_BridgeArmClient also requires references to additional components such as pistons. The location of the
@@ -260,24 +210,7 @@ Aside from needing a reference to the vehicle object and setting up the bindings
 script can use three other references: the interract trigger, the seats group, and the module markers group. The
 hierarchy should be arranged accordingly:
 
-- VehicleObject (networked)
-- VehiclePack_MkE_VehicleServer (networked)
-- InterractTrigger (networked)
-- StaticContext (networked)
-- Seats
-- Driver
-- SimulatedEntryTrigger
-
-  - Passenger1
-  - SimulatedEntryTrigger
-  - ...
-
-- ModuleMarkers
-- Hatch1
-- Hatch2
-- ...
-- ClientContext
-- ...
+![Screenshot (985)](https://user-images.githubusercontent.com/55603848/121971250-2a30dd80-cd2d-11eb-9695-6f52066e76a6.png)
 
 The interract trigger should also be in the networked context like the VehiclePack_MkE_VehicleServer script. The
 trigger should cover the entire vehicle, and it represents the maximum range the player must be in to interract with
@@ -306,19 +239,8 @@ to the VehiclePack_MkE_VehicleServer script, the interract trigger, the seats gr
 doors group in client-context. This script should be in client context, and the hierarchy should be arranged
 accordingly:
 
-- VehicleObject (networked)
-- VehiclePack_MkE_VehicleServer (networked)
-- InterractTrigger (networked)
-- StaticContext (networked)
-- ...
-- ClientContext
-- VehiclePack_MkE_DoorModule
-- Doors
-- Driver
-- ...
-- Passenger1
-- ...
-- ...
+![Screenshot (986)](https://user-images.githubusercontent.com/55603848/121971229-1f764880-cd2d-11eb-85cc-b2ad3a7d119e.png)
+
 
 The doors group contains groups that share the exact same names for the children of the seats group. Each group in the
 doors group should be located at the hinge of their corresponding door and contain the following custom properties:
@@ -339,19 +261,7 @@ The VehiclePack_MkE_HatchModule animates the hatches of the vehicle to open or c
 to the VehiclePack_MkE_VehicleServer script and the hatches group in client-context. This script should be in client
 context, and the hierarchy should be arranged accordingly:
 
-- VehicleObject (networked)
-- VehiclePack_MkE_VehicleServer (networked)
-- InterractTrigger (networked)
-- StaticContext (networked)
-- ...
-- ClientContext
-- VehiclePack_MkE_HatchModule
-- Hatches
-- Hatch1
-- ...
-- Hatch2
-- ...
-- ...
+![Screenshot (987)](https://user-images.githubusercontent.com/55603848/121971212-19806780-cd2d-11eb-9fdd-d990aee29037.png)
 
 Similar to the doors group in the VehiclePack_MkE_DoorModule, the hatches group contains groups that share the exact
 same names for the children of the module markers group. Each group in the hatches group should be located at the
@@ -432,35 +342,7 @@ wheels. This module requires a reference to the wheel it is assigned to, the whe
 moving assembly of the suspension. This module should be in client context and does not require
 VehiclePack_MkE_VehicleServer script. The hierarchy should be arranged accordingly:
 
-- VehicleObject (networked)
-- VehiclePack_MkE_VehicleServer (networked)
-- InterractTrigger (networked)
-- StaticContext (networked)
-- ...
-- ClientContext
-- Wheels
-- FrontLeftWheel
-- WheelRim
-- ...
-
-  - FrontRightWheel
-  - WheelRim
-  - ...
-  - ...
-
-- VehiclePack_MkE_SuspensionModules
-- FrontLeftSuspensionModule
-- VehiclePack_MkE_SuspensionEssentialsModule
-- VehiclePack_MkE_SuspensionExtrasModule
-- MovingAssembly
-- SteeringKnuckle
-- ...
-- StationaryAssembly
-- ...
-
-  - FrontRightSuspensionModule
-  - ...
-  - ...
+![Screenshot (988)](https://user-images.githubusercontent.com/55603848/121971199-11c0c300-cd2d-11eb-8838-6e624fe68a65.png)
 
 When making a new suspension unit or adjusting the wheel height, it is recommended to keep the pivot point of the
 client context folder and the parent of the suspension model to zero to make it easier to copy the position of
